@@ -15,10 +15,13 @@ namespace GrubbrrApp.Models
         public string JoinDate { get; set; }
         public string Gender { get; set; }
         public string About { get; set; }
+        public string Role { get; set; }
+        public string Skills { get; set; }
+        public string Hobbies { get; set; }
 
-        public virtual ICollection<Skill> Skills { get; set; }
-        public virtual ICollection<Role> Roles { get; set; }
-        public virtual ICollection<Hobby> Hobbies { get; set; }
+        //public virtual ICollection<Skill> Skills { get; set; }
+        //public virtual ICollection<Role> Roles { get; set; }
+        //public virtual ICollection<Hobby> Hobbies { get; set; }
 
         public Employee() { }
     }

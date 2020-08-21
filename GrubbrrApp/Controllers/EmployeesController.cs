@@ -39,6 +39,9 @@ namespace GrubbrrApp.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
+            ViewBag.Skills = db.Skills.ToList();
+            ViewBag.Roles = db.Roles.ToList();
+            ViewBag.Hobbies = db.Hobbies.ToList();
             return View();
         }
 
