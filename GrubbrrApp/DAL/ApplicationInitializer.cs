@@ -20,19 +20,28 @@ namespace GrubbrrApp.DAL
             context.SaveChanges();
 
             var skills = new List<Skill> {
-            new Skill{SkillName="HTML"},
-            new Skill{SkillName="CSS"},
-            new Skill{SkillName="MVC"}
-            };
+                new Skill{SkillName="HTML/CSS"},
+                new Skill{SkillName=".NET"},
+                new Skill{SkillName="Android"},
+                new Skill{SkillName="iOS"},
+                new Skill{SkillName="Java"},
+                new Skill{SkillName="SQL"},
+                new Skill{SkillName="AI"},
+                new Skill{SkillName="ML"},
+                new Skill{SkillName="XML"},
+                new Skill{SkillName="Python"},
+                new Skill{SkillName="JavaScript/jQuery"}
+                };
 
             skills.ForEach(s => context.Skills.Add(s));
             context.SaveChanges();
 
             var roles = new List<Role> {
-            new Role{RoleName="Project Manager"},
-            new Role{RoleName="Human Resources Manager"},
-            new Role{RoleName="Developer"}
-            };
+                new Role{RoleName="Business Analyst"},
+                new Role{RoleName="Project Manager"},
+                new Role{RoleName="Software Developer"},
+                new Role{RoleName="Web Developer"}
+                };
 
             roles.ForEach(r => context.Roles.Add(r));
             context.SaveChanges();

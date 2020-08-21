@@ -2,7 +2,7 @@
 {
     public class Hobby
     {
-        public int HobbyId;
-        public string HobbyName;
+        public int HobbyId { get; set; }
+        public string HobbyName { get; set; }
     }
 }
