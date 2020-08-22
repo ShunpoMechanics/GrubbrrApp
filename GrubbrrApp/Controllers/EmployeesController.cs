@@ -50,7 +50,7 @@ namespace GrubbrrApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,BirthDate,JoinDate,Gender,About")] Employee employee)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,BirthDate,JoinDate,Gender,About,Role")] Employee employee)
         {
             if (ModelState.IsValid)
             {
