@@ -10,42 +10,20 @@ namespace GrubbrrApp.Models
     public class Employee
     {
         public int Id { get; set; }
+        [Display(Name ="First Name")]
         public string FirstName { get; set; }
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         public string Address { get; set; }
+        [Display(Name = "Birth Date"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? BirthDate { get; set; }
+        [Display(Name = "Join Date"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? JoinDate { get; set; }
         public string Gender { get; set; }
         public string About { get; set; }
         public string Role { get; set; }
         public string Skills { get; set; }
         public string Hobbies { get; set; }
-
-        //[NotMapped]
-        //public int[] SkillsArr {
-        //    get
-        //    {
-        //        string[] tab = Skills.Split(',');
-        //        return new int[] { int.Parse(tab[0]), int.Parse(tab[1]) };
-        //    }
-        //    set
-        //    {
-        //        Skills = string.Format("{0},{1}", value[0], value[1]);
-        //    }
-        //}
-
-        //[NotMapped]
-        //public int[] HobbiesArr {
-        //    get
-        //    {
-        //        string[] tab = Hobbies.Split(',');
-        //        return new int[] { int.Parse(tab[0]), int.Parse(tab[1]) };
-        //    }
-        //    set
-        //    {
-        //        Hobbies = string.Format("{0},{1}", value[0], value[1]);
-        //    }
-        //}
 
         public enum GenderTypes {
         Male,

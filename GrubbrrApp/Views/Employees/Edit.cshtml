@@ -54,7 +54,7 @@
                 @Html.LabelFor(model => model.BirthDate, "Birth Date:", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
                     <input class="datefield" data-val="true" data-val-required="Date is required"
-                           id="BirthDate" name="BirthDate" type="date" value="model.BirthDate" />
+                           id="BirthDate" name="BirthDate" type="date" value="@ViewBag.BirthDate" />
                     @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -64,7 +64,7 @@
                 @Html.LabelFor(model => model.JoinDate, "Join Date:", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
                     <input class="datefield" data-val="true" data-val-required="Date is required"
-                           id="JoinDate" name="JoinDate" type="date" value="model.BirthDate" />
+                           id="JoinDate" name="JoinDate" type="date" value="@ViewBag.JoinDate" />
                     @Html.ValidationMessageFor(model => model.JoinDate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -82,14 +82,24 @@
                 Skills:
                 @foreach (var skill in Model.SkillsArr)
                 {
-                    <input type="checkbox" name="skillsArr" value="@skill.SkillId" />
-                    @Html.LabelFor(model => model.SkillsArr, (string)skill.SkillName)
-                }
+                    if (ViewBag.selectedSkills.Contains(skill.SkillId))
+                    {
+                        <input type="checkbox" name="skillsArr" value="@skill.SkillId" checked="checked" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="skillsArr" value="@skill.SkillId" />
+                    }
+
+                        @Html.LabelFor(model => model.SkillsArr, (string)skill.SkillName)
+                    }
 
             </div>
             <div class="form-group">
                 Hobbies:
-                @Html.ListBoxFor(model => model.HobbiesArr, new SelectList(Model.HobbiesArr, "HobbyId", "HobbyName"), htmlAttributes: new { @name = "hobbiesArr" })
+                @Html.DropDownList("HobbyId", new MultiSelectList(Model.HobbiesArr, "HobbyId", "HobbyName", ViewBag.selectedHobbies), htmlAttributes: new { Name = "hobbiesArr", multiple = "multiple" })
+                @*@Html.ListBox("HobbyId", new MultiSelectList(Model.HobbiesArr, "HobbyId", "HobbyName", ViewBag.selectedHobbies))*@
+                @*@Html.ListBoxFor(model => model.HobbiesArr, new MultiSelectList(Model.HobbiesArr, "HobbyId", "HobbyName"), htmlAttributes: new { @name = "hobbiesArr" })*@
             </div>
 
             <div class="form-group">
@@ -103,7 +113,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
-                <input type="submit" value="Cancel" class="btn btn-default" />
+                <input type="submit" name="Cancel" value="Cancel" formnovalidate class="btn btn-default" />
             </div>
         </div>
     </div>

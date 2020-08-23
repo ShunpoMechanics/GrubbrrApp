@@ -19,6 +19,9 @@ namespace GrubbrrApp.Controllers
         public ActionResult Index()
         {
             List<Employee> employees = db.Employees.ToList();
+            List<Role> roles = (List<Role>)TempData["Roles"];
+            List<Skill> skills = db.Skills.ToList();
+
             //Unparse skills
             //Get RoleName
             return View(employees);
@@ -58,10 +61,13 @@ namespace GrubbrrApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                employee.Skills = string.Join(",", skillsArr);
-                employee.Hobbies = string.Join(",", hobbiesArr);
-                db.Employees.Add(employee);
-                db.SaveChanges();
+                if (skillsArr != null && hobbiesArr != null)
+                {
+                    employee.Skills = string.Join(",", skillsArr);
+                    employee.Hobbies = string.Join(",", hobbiesArr);
+                    db.Employees.Add(employee);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
 
@@ -81,7 +87,11 @@ namespace GrubbrrApp.Controllers
                 return HttpNotFound();
             }
             ViewBag.RoleId = employee.Role;
+            ViewBag.BirthDate = ((DateTime)employee.BirthDate).ToString("yyyy-MM-dd");
+            ViewBag.JoinDate = ((DateTime)employee.JoinDate).ToString("yyyy-MM-dd");
             employee.SkillsArr = db.Skills.ToList();
+            ViewBag.selectedSkills = employee.Skills.Split(',').Select(Int32.Parse).ToList();
+            ViewBag.selectedHobbies = employee.Hobbies.Split(',').Select(Int32.Parse).ToList();
             ViewBag.Roles = db.Roles.ToList();
             employee.HobbiesArr = db.Hobbies.ToList();
             //Split skills and hobbies into something I can use in the View to prepopulate fields
