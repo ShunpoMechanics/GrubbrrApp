@@ -18,7 +18,10 @@ namespace GrubbrrApp.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            return View(db.Employees.ToList());
+            List<Employee> employees = db.Employees.ToList();
+            //Unparse skills
+            //Get RoleName
+            return View(employees);
         }
 
         // GET: Employees/Details/5
@@ -51,7 +54,7 @@ namespace GrubbrrApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,BirthDate,JoinDate,Gender,About,Role, Skills, Hobbies")] Employee employee, int[] skillsArr, int[] hobbiesArr)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,BirthDate,JoinDate,Gender,About, Role, Skills, Hobbies")] Employee employee, int[] skillsArr, int[] hobbiesArr)
         {
             if (ModelState.IsValid)
             {
@@ -77,6 +80,7 @@ namespace GrubbrrApp.Controllers
             {
                 return HttpNotFound();
             }
+            //Split skills and hobbies into something I can use in the View to prepopulate fields
             return View(employee);
         }
 
@@ -85,10 +89,12 @@ namespace GrubbrrApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,BirthDate,JoinDate,Gender,About")] Employee employee)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,BirthDate,JoinDate,Gender,About, Role, Skills, Hobbies")] Employee employee, int[] skillsArr, int[] hobbiesArr)
         {
             if (ModelState.IsValid)
             {
+                employee.Skills = string.Join(",", skillsArr);
+                employee.Hobbies = string.Join(",", hobbiesArr);
                 db.Entry(employee).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

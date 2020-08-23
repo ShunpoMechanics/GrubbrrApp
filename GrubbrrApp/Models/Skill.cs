@@ -6,7 +6,5 @@ namespace GrubbrrApp.Models
     {
         public int SkillId { get; set; }
         public string SkillName { get; set; }
-        [NotMapped]
-        public bool IsChecked { get; set; }
     }
 }

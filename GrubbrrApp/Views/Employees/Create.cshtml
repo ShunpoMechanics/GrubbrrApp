@@ -50,7 +50,6 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.BirthDate, "Birth Date:", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
-                    @*@Html.TextBoxFor(model => model.BirthDate, new { htmlAttributes = new { @class = "form-control" } })*@
                     <input class="datefield" data-val="true" data-val-required="Date is required"
                            id="BirthDate" name="BirthDate" type="date" value="model.BirthDate" />
                     @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
@@ -61,7 +60,6 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.JoinDate, "Join Date:", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
-                    @*@Html.EditorFor(model => model.JoinDate, new { htmlAttributes = new { @class = "form-control" } })*@
                     <input class="datefield" data-val="true" data-val-required="Date is required"
                            id="JoinDate" name="JoinDate" type="date" value="model.BirthDate" />
                     @Html.ValidationMessageFor(model => model.JoinDate, "", new { @class = "text-danger" })
@@ -75,34 +73,19 @@
                 {
                     @Html.RadioButtonFor(model => model.Role, (int)item.RoleId)
                     @Html.LabelFor(model => model.Role, (string)item.RoleName)
-                    @*<input type="radio" name="role" id="role" />*@
-                    @*<label name="role" for="role">@item.RoleName</label>*@
                 }
             </div>
             <div class="form-group">
                 Skills:
                 @foreach (var skill in Model.SkillsArr)
                 {
-                    //Various methods for generating the checkboxes but it wont bind
                     <input type="checkbox" name="skillsArr" value="@skill.SkillId" />
                     @Html.LabelFor(model => model.SkillsArr, (string)skill.SkillName)
-                    @*@Html.CheckBoxFor(model => skill.IsChecked)
-                    @Html.HiddenFor(model => skill.SkillId)
-                    @Html.DisplayFor(model => skill.SkillName)*@
-
-                    @*@Html.EditorFor(model => model.SkillsSelected, false)*@
-
-                    @*@Html.CheckBox((string)item.SkillName, false);*@
-                    @*@Html.LabelFor(model => model.Skills, (string)item.SkillName)*@
-
-                    @*<input name="SkillsArr" type="checkbox" value="item.SkillId" />
-                    @Html.LabelFor(model => model.SkillsArr, (string)item.SkillName)*@
                 }
 
             </div>
             <div class="form-group">
                 Hobbies:
-                @*@Html.DropDownListFor(model => model.Hobbies, new SelectList(ViewBag.Hobbies, "HobbyId", "HobbyName"))*@
                 @Html.ListBoxFor(model => model.HobbiesArr, new SelectList(Model.HobbiesArr, "HobbyId", "HobbyName"), htmlAttributes: new { @name="hobbiesArr" })
             </div>
 
