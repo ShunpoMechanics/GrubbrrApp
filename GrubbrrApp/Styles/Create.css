@@ -1,0 +1,16 @@
+﻿.input {
+max-width: 2000px;
+}
+
+.grubbrr-dropdown {
+    width:100%;
+}
+
+textarea {
+    width: 100%;
+    max-width: 2800px;
+}
+
+.checkbox-container {
+    width: auto;
+}

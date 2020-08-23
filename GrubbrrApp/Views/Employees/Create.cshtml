@@ -4,6 +4,9 @@
 @{
     ViewBag.Title = "Create";
 }
+<head>
+    <link rel="stylesheet" href="../Styles/Create.css" type="text/css" />
+</head>
 
 @using (Html.BeginForm())
 {
@@ -14,6 +17,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="col-md-6">
             <div class="form-group">
+
                 @Html.LabelFor(model => model.FirstName, "First Name:", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
                     @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @required="required" } })
@@ -24,7 +28,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Address, "Address:", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
-                    @Html.TextAreaFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.TextAreaFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @required = "required", @maxlength=1000, @placeholder="Address (Max 1000 characters)"} })
                     @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -33,7 +37,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Gender, "Gender:", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
-                    @Html.DropDownListFor(model => model.Gender, new SelectList(Enum.GetValues(typeof(GrubbrrApp.Models.Employee.GenderTypes))), "Select Gender", htmlAttributes: new { @required = "required" })
+                    @Html.DropDownListFor(model => model.Gender, new SelectList(Enum.GetValues(typeof(GrubbrrApp.Models.Employee.GenderTypes))), "Select Gender", htmlAttributes: new { @required = "required", @class="grubbrr-dropdown" })
                     @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -68,42 +72,60 @@
         </div>
         <div class="col-md-12">
             <div class="form-group">
-                Roles:
+                <div class="col-md-1">
+                    @Html.Label("Roles:")
+                </div>
                 @foreach (var item in @ViewBag.Roles)
                 {
+                <div class="col-md-2">
                     @Html.RadioButtonFor(model => model.Role, (int)item.RoleId)
                     @Html.LabelFor(model => model.Role, (string)item.RoleName)
+                </div>
                 }
             </div>
-            <div class="form-group">
-                Skills:
-                @foreach (var skill in Model.SkillsArr)
-                {
-                    <input type="checkbox" name="skillsArr" value="@skill.SkillId" />
-                    @Html.LabelFor(model => model.SkillsArr, (string)skill.SkillName)
-                }
+        </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-1">
+                        @Html.Label("Skills:")
+                    </div>
+                    @foreach (var skill in Model.SkillsArr)
+                    {
+                        <div class="checkbox-container col-md-2">
+                            <input type="checkbox" name="skillsArr" value="@skill.SkillId" />
+                            @Html.LabelFor(model => model.SkillsArr, (string)skill.SkillName)
+                        </div>
+                    }
 
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-1">
+                        @Html.Label("Hobbies:")
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DropDownList("HobbyId", new MultiSelectList(Model.HobbiesArr, "HobbyId", "HobbyName", ViewBag.selectedHobbies), htmlAttributes: new { Name = "hobbiesArr", multiple = "multiple" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-1">
+                        @Html.LabelFor(model => model.About, "About: ", htmlAttributes: new { @class = "control-label col-md-2" })
+                    </div>
+                    <div class="col-md-7">
+                        @Html.TextAreaFor(model => model.About, new { htmlAttributes = new { @class = "form-control grubbrr-text", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
             <div class="form-group">
-                Hobbies:
-                @Html.ListBoxFor(model => model.HobbiesArr, new SelectList(Model.HobbiesArr, "HobbyId", "HobbyName"), htmlAttributes: new { @name="hobbiesArr" })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.About, "About: ", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.About, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
-                    @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" name="Save" value="Save" class="btn btn-default" />
+                    <input type="submit" name="Cancel" value="Cancel" formnovalidate class="btn btn-default" />
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" name="Save" value="Save" class="btn btn-default" />
-                <input type="submit" name="Cancel" value="Cancel" formnovalidate class="btn btn-default" />
-            </div>
-        </div>
-    </div>
 }
 
 @section Scripts {

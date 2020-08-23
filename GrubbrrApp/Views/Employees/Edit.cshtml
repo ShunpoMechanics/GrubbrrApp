@@ -95,11 +95,10 @@
                     }
 
             </div>
+
             <div class="form-group">
                 Hobbies:
                 @Html.DropDownList("HobbyId", new MultiSelectList(Model.HobbiesArr, "HobbyId", "HobbyName", ViewBag.selectedHobbies), htmlAttributes: new { Name = "hobbiesArr", multiple = "multiple" })
-                @*@Html.ListBox("HobbyId", new MultiSelectList(Model.HobbiesArr, "HobbyId", "HobbyName", ViewBag.selectedHobbies))*@
-                @*@Html.ListBoxFor(model => model.HobbiesArr, new MultiSelectList(Model.HobbiesArr, "HobbyId", "HobbyName"), htmlAttributes: new { @name = "hobbiesArr" })*@
             </div>
 
             <div class="form-group">
