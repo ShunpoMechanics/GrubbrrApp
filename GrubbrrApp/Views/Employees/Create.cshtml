@@ -103,7 +103,7 @@
             <div class="form-group">
                 Hobbies:
                 @*@Html.DropDownListFor(model => model.Hobbies, new SelectList(ViewBag.Hobbies, "HobbyId", "HobbyName"))*@
-                @Html.ListBoxFor(model => model.Hobbies, new SelectList(ViewBag.Hobbies, "HobbyId", "HobbyName"))
+                @Html.ListBoxFor(model => model.HobbiesArr, new SelectList(Model.HobbiesArr, "HobbyId", "HobbyName"), htmlAttributes: new { @name="hobbiesArr" })
             </div>
 
             <div class="form-group">

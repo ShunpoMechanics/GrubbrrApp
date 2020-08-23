@@ -42,7 +42,7 @@ namespace GrubbrrApp.Controllers
             Employee employee = new Employee();
             employee.SkillsArr = db.Skills.ToList();
             ViewBag.Roles = db.Roles.ToList();
-            ViewBag.Hobbies = db.Hobbies.ToList();
+            employee.HobbiesArr = db.Hobbies.ToList();
             return View(employee);
         }
 
@@ -51,11 +51,12 @@ namespace GrubbrrApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,BirthDate,JoinDate,Gender,About,Role, Skills, Hobbies")] Employee employee, int[] skillsArr)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,BirthDate,JoinDate,Gender,About,Role, Skills, Hobbies")] Employee employee, int[] skillsArr, int[] hobbiesArr)
         {
             if (ModelState.IsValid)
             {
                 employee.Skills = string.Join(",", skillsArr);
+                employee.Hobbies = string.Join(",", hobbiesArr);
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
