@@ -80,6 +80,10 @@ namespace GrubbrrApp.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.RoleId = employee.Role;
+            employee.SkillsArr = db.Skills.ToList();
+            ViewBag.Roles = db.Roles.ToList();
+            employee.HobbiesArr = db.Hobbies.ToList();
             //Split skills and hobbies into something I can use in the View to prepopulate fields
             return View(employee);
         }
