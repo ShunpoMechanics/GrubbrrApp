@@ -32,7 +32,6 @@ namespace GrubbrrApp.Models
 
         [NotMapped]
         public virtual IList<Skill> SkillsArr { get; set; }
-        //public virtual ICollection<Role> Roles { get; set; }
 
         [NotMapped]
         public virtual IList<Hobby> HobbiesArr { get; set; }

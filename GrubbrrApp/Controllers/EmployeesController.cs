@@ -21,7 +21,7 @@ namespace GrubbrrApp.Controllers
             List<Employee> employees = db.Employees.ToList();
             List<Role> roles = db.Roles.ToList();
             List<Skill> skills = db.Skills.ToList();
-            //Get RoleName and SkillNames for List View
+            //Get RoleName and SkillNames for List View by parsing the comma delimited strings
             foreach (Employee employee in employees)
             {
                 employee.getRoleName(roles);
@@ -66,7 +66,9 @@ namespace GrubbrrApp.Controllers
             {
                 if (skillsArr != null && hobbiesArr != null)
                 {
+                    //Serialize skills into a comma delimited string to store in the db
                     employee.Skills = string.Join(",", skillsArr);
+                    //Serialize hobbies into a comma delimited string to store in the db
                     employee.Hobbies = string.Join(",", hobbiesArr);
                     db.Employees.Add(employee);
                     db.SaveChanges();
@@ -90,14 +92,16 @@ namespace GrubbrrApp.Controllers
                 return HttpNotFound();
             }
             ViewBag.RoleId = employee.Role;
+            //Casting to prepopulate DatePicker
             ViewBag.BirthDate = ((DateTime)employee.BirthDate).ToString("yyyy-MM-dd");
             ViewBag.JoinDate = ((DateTime)employee.JoinDate).ToString("yyyy-MM-dd");
+            //Get lists of available skills and hobbies
             employee.SkillsArr = db.Skills.ToList();
+            employee.HobbiesArr = db.Hobbies.ToList();
+            ViewBag.Roles = db.Roles.ToList();
+            //Get existing skills and hobbies from the db and parse them to prepopulate
             ViewBag.selectedSkills = employee.Skills.Split(',').Select(Int32.Parse).ToList();
             ViewBag.selectedHobbies = employee.Hobbies.Split(',').Select(Int32.Parse).ToList();
-            ViewBag.Roles = db.Roles.ToList();
-            employee.HobbiesArr = db.Hobbies.ToList();
-            //Split skills and hobbies into something I can use in the View to prepopulate fields
             return View(employee);
         }
 
@@ -110,7 +114,9 @@ namespace GrubbrrApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Serialize skills into a comma delimited string to store in the db
                 employee.Skills = string.Join(",", skillsArr);
+                //Serialize hobbies into a comma delimited string to store in the db
                 employee.Hobbies = string.Join(",", hobbiesArr);
                 db.Entry(employee).State = EntityState.Modified;
                 db.SaveChanges();
