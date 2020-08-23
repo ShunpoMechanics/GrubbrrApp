@@ -39,10 +39,11 @@ namespace GrubbrrApp.Controllers
         // GET: Employees/Create
         public ActionResult Create()
         {
-            ViewBag.Skills = db.Skills.ToList();
+            Employee employee = new Employee();
+            employee.SkillsArr = db.Skills.ToList();
             ViewBag.Roles = db.Roles.ToList();
             ViewBag.Hobbies = db.Hobbies.ToList();
-            return View();
+            return View(employee);
         }
 
         // POST: Employees/Create
@@ -50,10 +51,11 @@ namespace GrubbrrApp.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,BirthDate,JoinDate,Gender,About,Role")] Employee employee)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,BirthDate,JoinDate,Gender,About,Role, Skills, Hobbies")] Employee employee, int[] skillsArr)
         {
             if (ModelState.IsValid)
             {
+                employee.Skills = string.Join(",", skillsArr);
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -117,6 +119,11 @@ namespace GrubbrrApp.Controllers
             db.Employees.Remove(employee);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        // Redirect to Index upon pressing cancel
+        [HttpPost]
+        public ActionResult Cancel(Employee employee) {
+            return RedirectToAction("Index", "EmployeeController");
         }
 
         protected override void Dispose(bool disposing)

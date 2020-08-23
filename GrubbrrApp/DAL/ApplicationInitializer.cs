@@ -11,9 +11,9 @@ namespace GrubbrrApp.DAL
         protected override void Seed(EmployeeContext context)
         {
             var employees = new List<Employee> {
-                new Employee{FirstName="Jonathan",LastName="Correa", Address="860 NW 86th Ave", BirthDate="1996-09-24", JoinDate="2020-08-24", Gender="Male", About="New applicant looking forward to a excellent opportunity" },
-                new Employee{FirstName="John", LastName="Doe", Address="2020 End of Days Ave", BirthDate="1930-12-25", JoinDate="2002-04-14", Gender="Male", About= "Seen it all, tired of it." },
-                new Employee{FirstName="Jane", LastName="Doe", Address="7345 Fairway Dr", BirthDate="1940-01-01", JoinDate="2003-05-14", Gender="Female", About="Happy person, no relation to John stop asking." }
+                new Employee{FirstName="Jonathan",LastName="Correa", Address="860 NW 86th Ave", BirthDate=DateTime.Parse("1996-09-24"), JoinDate=DateTime.Parse("2020-08-24"), Gender="Male", About="New applicant looking forward to a excellent opportunity" },
+                new Employee{FirstName="John", LastName="Doe", Address="2020 End of Days Ave", BirthDate=DateTime.Parse("1930-12-25"), JoinDate=DateTime.Parse("2002-04-14"), Gender="Male", About= "Seen it all, tired of it." },
+                new Employee{FirstName="Jane", LastName="Doe", Address="7345 Fairway Dr", BirthDate=DateTime.Parse("1940-01-01"), JoinDate=DateTime.Parse("2003-05-14"), Gender="Female", About="Happy person, no relation to John stop asking." }
             };
 
             employees.ForEach(e => context.Employees.Add(e));
