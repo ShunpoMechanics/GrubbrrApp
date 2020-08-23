@@ -38,5 +38,31 @@ namespace GrubbrrApp.Models
         public virtual IList<Hobby> HobbiesArr { get; set; }
 
         public Employee() { }
+
+        public void UnParseEmployeeSkills(List<Skill> skills) {
+
+                string skillNameStr = "";
+                int[] skillIds = this.Skills.Split(',').Select(Int32.Parse).ToArray();
+                foreach (Skill skill in skills)
+                {
+                    if (skillIds.Contains(skill.SkillId))
+                    {
+                        if (skillNameStr == "") skillNameStr += skill.SkillName;
+                        else skillNameStr = string.Join(",", skillNameStr, skill.SkillName);
+                    }
+                }
+                this.Skills = skillNameStr;
+        }
+
+        public void getRoleName(List<Role> roles) {
+            foreach (Role role in roles)
+            {
+                if (int.Parse(this.Role) == role.RoleId)
+                {
+                    this.Role = role.RoleName;
+                    break;
+                }
+            }
+        }
     }
 }

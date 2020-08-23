@@ -19,11 +19,14 @@ namespace GrubbrrApp.Controllers
         public ActionResult Index()
         {
             List<Employee> employees = db.Employees.ToList();
-            List<Role> roles = (List<Role>)TempData["Roles"];
+            List<Role> roles = db.Roles.ToList();
             List<Skill> skills = db.Skills.ToList();
-
-            //Unparse skills
-            //Get RoleName
+            //Get RoleName and SkillNames for List View
+            foreach (Employee employee in employees)
+            {
+                employee.getRoleName(roles);
+                employee.UnParseEmployeeSkills(skills);
+            }
             return View(employees);
         }
 

@@ -139,7 +139,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="DAL\ApplicationInitializer.cs" />
     <Compile Include="DAL\EmployeeContext.cs" />
     <Compile Include="Global.asax.cs">
