@@ -116,7 +116,7 @@
                         @Html.LabelFor(model => model.About, "About: ", htmlAttributes: new { @class = "control-label" })
                     </div>
                     <div class="col-md-7">
-                        @Html.TextAreaFor(model => model.About, new { @placeholder = "Address (Max 1000 characters)", @required="required" })
+                        @Html.TextAreaFor(model => model.About, new { @placeholder = "About (Max 1000 characters)", @required="required" })
                         @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
                     </div>
                 </div>
